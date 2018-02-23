@@ -93,6 +93,7 @@ public class Program
             {
                 if (column != "X" && column != "O")
                 {
+
                     openSlots++;
                 }
             }
