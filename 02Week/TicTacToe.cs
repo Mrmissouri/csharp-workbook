@@ -32,7 +32,20 @@ public class Program
         Console.WriteLine("Enter Column:");
         int column = int.Parse(Console.ReadLine());
         PlaceMark(row, column);
-        CheckForWin();
+
+        if (CheckForWin())
+        {
+            DrawBoard();
+            Console.WriteLine("Player " + playerTurn + " Won!");
+            return;
+        }
+        else if (CheckForTie())
+        {
+            DrawBoard();
+            Console.WriteLine("It's a Tie!");
+            return;
+        }
+
         playerTurn = (playerTurn == "X") ? "O" : "X";
     }
 
@@ -40,55 +53,60 @@ public class Program
 
     {
         // your code goes here
-
-
-
-        board[row][column] = "X";
+        // board[row][column] = "X";
         board[row][column] = playerTurn;
-
-
-
-
     }
 
     public static bool CheckForWin()
     {
-        // your code goes here
-        if (HorizontalWin())
-        {
+        //// your code goes here
+        //if (HorizontalWin())
+        //{
+        //    Console.WriteLine("Player " + playerTurn + " Won!");
+        //    return true;
+        //}
+        //else if (VerticalWin())
+        //{
+        //    Console.WriteLine("Player " + playerTurn + " Won!");
+        //    return true;
+        //}
+        //else if (DiagonalWin())
+        //{
+        //    Console.WriteLine("Player " + playerTurn + " Won!");
+        //    return true;
+        //}
+        //else
+        //{
+        //    return false;
+        //}
 
-            Console.WriteLine("Player " + playerTurn + " Won!");
-            return true;
-        }
-
-        else if (VerticalWin())
-        {
-
-            Console.WriteLine("Player " + playerTurn + " Won!");
-            return true;
-        }
-        else if (DiagonalWin())
-        {
-            Console.WriteLine("Player " + playerTurn + " Won!");
-            return true;
-        }
-
-
-
-        else
-        {
-            return false;
-        }
-
-
-
+        return (HorizontalWin() || VerticalWin() || DiagonalWin());
     }
 
+    public static int SlotsAvailable()
+    {
+        int openSlots = 0;
+
+        foreach (var row in board)
+        {
+            foreach (var column in row)
+            {
+                if (column != "X" && column != "O")
+                {
+                    openSlots++;
+                }
+            }
+        }
+
+        return openSlots;
+    }
     public static bool CheckForTie()
     {
-        // your code goes here
+        bool tie = false;
 
-        return false;
+        tie = (SlotsAvailable() == 0) ? true : false;
+
+        return tie;
     }
 
     public static bool HorizontalWin()
@@ -109,14 +127,12 @@ public class Program
 
         {
             return true;
-
         }
         else
         {
             return false;
         }
     }
-
 
     public static bool VerticalWin()
     {
@@ -151,7 +167,6 @@ public class Program
             playerTurn && board[0][2] == playerTurn)
         {
             return true;
-
         }
         else
         {
