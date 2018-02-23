@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 public class Program
 {
@@ -10,14 +10,15 @@ public class Program
         new string[] {" ", " ", " "}
      };
 
+
     public static void Main()
     {
-        do 
+        do
         {
             DrawBoard();
             GetInput();
 
-        } while (!CheckForWin() && !CheckForTie())
+        } while (!CheckForWin() && !CheckForTie());
 
         // leave this command at the end so your program does not close automatically
         Console.ReadLine();
@@ -27,21 +28,60 @@ public class Program
     {
         Console.WriteLine("Player " + playerTurn);
         Console.WriteLine("Enter Row:");
-        int row = Int32.Parse(Console.ReadLine());
+        int row = int.Parse(Console.ReadLine());
         Console.WriteLine("Enter Column:");
-        int column = Int32.Parse(Console.ReadLine());
+        int column = int.Parse(Console.ReadLine());
+        PlaceMark(row, column);
+        CheckForWin();
+        playerTurn = (playerTurn == "X") ? "O" : "X";
     }
 
     public static void PlaceMark(int row, int column)
+
     {
-       // your code goes here
+        // your code goes here
+
+
+
+        board[row][column] = "X";
+        board[row][column] = playerTurn;
+
+
+
+
     }
 
     public static bool CheckForWin()
     {
         // your code goes here
+        if (HorizontalWin())
+        {
 
-        return false;
+            Console.WriteLine("Player " + playerTurn + " Won!");
+            return true;
+        }
+
+        else if (VerticalWin())
+        {
+
+            Console.WriteLine("Player " + playerTurn + " Won!");
+            return true;
+        }
+        else if (DiagonalWin())
+        {
+            Console.WriteLine("Player " + playerTurn + " Won!");
+            return true;
+        }
+
+
+
+        else
+        {
+            return false;
+        }
+
+
+
     }
 
     public static bool CheckForTie()
@@ -50,26 +90,73 @@ public class Program
 
         return false;
     }
-    
+
     public static bool HorizontalWin()
     {
-       // your code goes here
+        // your code goes here
 
-       return false;
+        // Top horizontal row
+        if (board[0][0] == playerTurn && board[0][1] ==
+            playerTurn && board[0][2] == playerTurn
+            ||
+        // Middle horizontal row
+            board[1][0] == playerTurn && board[1][1] ==
+            playerTurn && board[1][2] == playerTurn
+            ||
+        //Bottom horizontal row
+            board[2][0] == playerTurn && board[2][1] ==
+            playerTurn && board[2][2] == playerTurn)
+
+        {
+            return true;
+
+        }
+        else
+        {
+            return false;
+        }
     }
+
 
     public static bool VerticalWin()
     {
         // your code goes here
 
-        return false;
+        // Left vertical row
+        if (board[0][0] == playerTurn && board[1][0] ==
+            playerTurn && board[2][0] == playerTurn
+        // Middle vertical row
+        || board[0][1] == playerTurn && board[1][1] ==
+            playerTurn && board[2][1] == playerTurn
+        // Right vertical row
+        || board[0][2] == playerTurn && board[1][2] ==
+            playerTurn && board[2][2] == playerTurn)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static bool DiagonalWin()
     {
         // your code goes here
+        // Diagonal from top left to bottom right
+        if (board[0][0] == playerTurn && board[1][1] ==
+            playerTurn && board[2][2] == playerTurn
+        // Diagonal from bottom left to top right
+        || board[2][0] == playerTurn && board[1][1] ==
+            playerTurn && board[0][2] == playerTurn)
+        {
+            return true;
 
-        return false;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static void DrawBoard()
@@ -81,4 +168,5 @@ public class Program
         Console.WriteLine("  -----");
         Console.WriteLine("2 " + String.Join("|", board[2]));
     }
+
 }
