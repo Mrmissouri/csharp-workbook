@@ -10,15 +10,15 @@ public class Program
         string hand2 = Console.ReadLine().ToLower();
 
         Console.WriteLine(CompareHands(hand1, hand2));
-        Console.ReadLine();
+        //Console.ReadLine();
 
-        //Console.WriteLine("Play again?");
-        //string playAgain = Console.ReadLine().ToLower();
-        //if (playAgain == "yes")
-        //{
-        //    Console.Clear();
-        //    return;
-        //}
+        Console.WriteLine("Play again?");
+        string playAgain = Console.ReadLine().ToLower();
+        if (playAgain == "yes")
+        {
+            Console.Clear();
+            Main();
+        }
     }
 
     public static string CompareHands(string hand1, string hand2)

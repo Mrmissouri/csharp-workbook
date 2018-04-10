@@ -47,6 +47,14 @@ public class Program
         }
 
         playerTurn = (playerTurn == "X") ? "O" : "X";
+        if (playerTurn == "X")
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+        }
     }
 
     public static void PlaceMark(int row, int column)
